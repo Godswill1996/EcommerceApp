@@ -27,8 +27,8 @@ SECRET_KEY = 'django-insecure-r!644-519pqvi_2q38w)&8^u$q*@4b0b$w&en86=&_kxuw0rc%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-CSRF_TRUSTED_ORIGINS = []
+ALLOWED_HOSTS = ['ecommerceapp-production-735f.up.railway.app','localhost','127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://ecommerceapp-production-735f.up.railway.app']
 
 
 # Application definition
@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'python_django.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default':  dj_database_url.parse('postgresql://postgres:HkzAwPqenjMhQyspjWupBBPDWdlGQaBf@interchange.proxy.rlwy.net:53303/railway'),
+    'default':  dj_database_url.parse('postgresql://postgres:nxkKdoWaNFNDqQHrXuMGOgBgUpfvWSGI@junction.proxy.rlwy.net:40620/railway'),
         #'ENGINE': 'django.db.backends.postgresql',
         #'NAME': 'railway',
         #'USER' : 'postgres',
