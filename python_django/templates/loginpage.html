@@ -1,0 +1,60 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login page</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body style="background-color: rgb(20, 20, 20);">
+    <style>
+    .form-container {
+      margin-top: 100px;
+    }
+    .card {
+      border-radius: 1rem;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+  <div class="container form-container d-flex justify-content-center align-items-center min-vh-100"
+   style="background-color: rgb(6, 7, 10);">
+    <div class="col-md-5">
+      <div class="card p-4">
+        <h4 class="text-center mb-4">Passion</h4>
+
+        <form action="#" method="POST">
+          {% csrf_token %}
+          
+          <div class="mb-3">
+            <label for="email" class="form-label" name="username">Username</label>
+            <input type="email" class="form-control" id="username" name="username" required  />
+          </div>    
+          <div class="mb-3">
+            <label for="password1" class="form-label" name="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" required />
+            </form>
+          </div>
+          
+          <div class="d-grid">
+            <button type="submit" class="btn btn-success" style="background-color: rgb(32, 221, 32);"><a href="{% url 'index' %}">Login</a></button>
+          </div>
+          
+        </form>
+      </div>
+    </div>
+  </div>
+  <div>
+    {% for message in messages%}
+    <h2>{{message}}</h2>
+    {% endfor %}
+  </div>
+    
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+    
+   
+</body> 
+</html>
