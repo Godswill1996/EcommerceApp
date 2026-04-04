@@ -38,11 +38,13 @@ INSTALLED_APPS = [
     'shopping',
     'cart',
     'payment',
+    'cloudinary',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',
     'django.contrib.staticfiles',
     #'python_django.shopping.apps.ShoppingConfig',
    # 'python_django.cart.apps.CartConfig',
@@ -153,3 +155,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO','https')
 SECURE_SSL_REDIRECT = True
+
+#The cloudinary
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME' : os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY' : os.environ.get('CLOUDINARY_API_KEY'),
+    'API_SECRET' : os.environ.get('CLOUDINARY_API_SECRET')
+    }
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
