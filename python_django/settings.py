@@ -34,21 +34,21 @@ CSRF_TRUSTED_ORIGINS = ['https://ecommerceapp-production-735f.up.railway.app']
 # Application definition
 
 INSTALLED_APPS = [
-    #'python_django.shopping.apps.ShoppingConfig',
-   # 'python_django.cart.apps.CartConfig',
-   # 'python_django.payment.apps.PaymentConfig',
+    'whitenoise.runserver_nostatic',
     'shopping',
     'cart',
     'payment',
-
-    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'whitenoise.runserver_nostatic',
+    #'python_django.shopping.apps.ShoppingConfig',
+   # 'python_django.cart.apps.CartConfig',
+   # 'python_django.payment.apps.PaymentConfig',
+    
+   
 ]
 
 MIDDLEWARE = [
