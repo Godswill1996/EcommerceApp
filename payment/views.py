@@ -112,7 +112,7 @@ def process_order(request):
 
         #Paystack Details
         url= 'https://api.paystack.co/transaction/initialize'
-        headers = {'Authorization': f'Bearer {os.environ.get('PAYSTACK_SECRET_KEY')}','Content-Type':'application/json',}
+        headers = {'Authorization': f'Bearer {os.environ.get("PAYSTACK_SECRET_KEY")}','Content-Type':'application/json',}
         data = {'email':email, 'amount': str(int(totals * 100)),
                 'callback_url': 'https://ecommerceapp-production-735f.up.railway.app/payment/verify',}
         
@@ -214,7 +214,7 @@ def process_order(request):
 def process_order_verify(request):
     reference = request.GET.get('reference')
     url = f'https://api.paystack.co/transaction/verify/{reference}'
-    headers = {'Authorization': f'Bearer{os.environ.get('PAYSTACK_SECRET_KEY')}',}
+    headers = {'Authorization': f'Bearer {os.environ.get("PAYSTACK_SECRET_KEY")}',}
     response = requests.get(url, headers=headers)
     res_data = response.json()
     if res_data['status'] and res_data['data']['status'] == 'success':
