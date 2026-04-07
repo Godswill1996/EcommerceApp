@@ -26,9 +26,9 @@
                 {% for items in cart_products %}
                   {{ items.name }}:
                         {% if items.is_sale %}
-                             ${{ items.sale_price }}
+                             ₦{{ items.sale_price }}
                         {% else %}
-                            ${{ items.price }}
+                            ₦{{ items.price }}
 
                   {% endif %}
                   <br>
@@ -42,7 +42,7 @@
               <br><br>
 
                 {% endfor %}
-                <strong>Total:   ${{ totals }}</strong>
+                <strong>Total:   ₦{{ totals }}</strong>
                 <br><br>
                 <a href="{% url 'cart_summary' %}"class='btn btn-sm btn-outline-secondary'>Update Items</a>
             </div>

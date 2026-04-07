@@ -39,12 +39,12 @@
 
           <!-- Product price-->
            <strike>
-           ${{ items.price }}
+           ₦{{ items.price }}
           </strike>
-           ${{ items.sale_price }}
+           ₦{{ items.sale_price }}
 
         {% else %}
-         ${{ items.price }}
+         ₦{{ items.price }}
         
         {% endif %}
         <br><br><br>
@@ -82,7 +82,7 @@
 
             {% endfor %}
             <div align ='right'>
-            <h3>Total: ${{ totals }}</h3>
+            <h3>Total: ₦{{ totals }}</h3>
             <a href="{% url 'checkout' %}" class="btn btn-success">Checkout</a>
 
             <br><br>
