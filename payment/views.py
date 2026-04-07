@@ -6,6 +6,8 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from shopping.models import product,profile
 import datetime
+import os
+import requests
 
 # Create your views here.
 
@@ -103,11 +105,25 @@ def process_order(request):
         full_name = my_shipping['shipping_full_name']
         email = my_shipping['shipping_email']
         
-        
         #print(my_shipping)
         #Create shipping address from shipping info
         shipping_address = f"{my_shipping['shipping_address1']}\n{my_shipping['shipping_address2']}\n{my_shipping['shipping_city']}\n{my_shipping['shipping_state']}\n{my_shipping['shipping_zipcode']}\n{my_shipping['shipping_country']}"
         amount_paid = totals
+
+        #Paystack Details
+        url= 'https://api.paystack.co/transaction/initialize'
+        headers = {'Authorization': f'Bearer {os.environ.get('PAYSTACK_SECRET_KEY')}','Content-Type':'application/json',}
+        data = {'email':email, 'amount': str(int(totals * 100)),
+                'callback_url': 'https://ecommerceapp-production-735f.up.railway.app/payment/verify',}
+        
+        response = requests.post(url, headers=headers, json=data)
+        res_data = response.json()
+        if res_data['status']:
+            return redirect(res_data['data']['authorization_url'])
+        
+        return redirect('checkout')
+        
+
 
         #Create an order
         
@@ -194,6 +210,18 @@ def process_order(request):
     else:
         messages.success(request,'Access Denied')
         return redirect('ecommerce')
+
+def process_order_verify(request):
+    reference = request.GET.get('reference')
+    url = f'https://api.paystack.co/transaction/verify/{reference}'
+    headers = {'Authorization': f'Bearer{os.environ.get('PAYSTACK_SECRET_KEY')}',}
+    response = requests.get(url, headers=headers)
+    res_data = response.json()
+    if res_data['status'] and res_data['data']['status'] == 'success':
+        return render(request,'payment/payment_success.html', {'details':res_data['data']})
+    else :
+        return render(request,'payment/payment_failed.html')
+
 
 
 def billing_info(request):

@@ -163,3 +163,7 @@ CLOUDINARY_STORAGE = {
     'API_SECRET' : os.environ.get('CLOUDINARY_API_SECRET')
     }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+#Paystack secret key
+PAYSTACK_SECRET_KEY = os.environ.get('PAYSTACK_SECRET_KEY')
+
