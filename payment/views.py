@@ -114,7 +114,7 @@ def process_order(request):
         url= 'https://api.paystack.co/transaction/initialize'
         headers = {'Authorization': f'Bearer {os.environ.get("PAYSTACK_SECRET_KEY")}','Content-Type':'application/json',}
         data = {'email':email, 'amount': str(int(totals * 100)),
-                'callback_url': 'https://ecommerceapp-production-735f.up.railway.app/payment/verify',}
+                'callback_url': 'https://ecommerceapp-production-735f.up.railway.app/payment/process_order_verify',}
         
         response = requests.post(url, headers=headers, json=data)
         res_data = response.json()
