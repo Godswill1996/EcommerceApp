@@ -235,7 +235,7 @@ def process_order_verify(request):
                 product_id = str(item.id)
                 OrderItems.objects.create(order=new_order,products=item,user=request.user if request.user.is_authenticated else None,quantity=quantities[product_id],price=item.price if not item.is_sale else item.sale_price)
             
-            request.session.pop('cart',None)
+            #request.session.pop('cart',None)
             request.session.modified = True
 
             return render(request,'payment/payment_success.html', {'details':res_data.get('data',{})})
