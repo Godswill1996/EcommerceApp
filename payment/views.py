@@ -219,7 +219,9 @@ def process_order_verify(request):
     res_data = response.json()
 
     if res_data['status'] and res_data['data']['status'] == 'success':
-        
+            
+            request.session.pop('cart',None)
+            request.session.modified = True
 
             return render(request,'payment/payment_success.html', {'details':res_data['data']})
     else:
