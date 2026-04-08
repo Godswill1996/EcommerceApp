@@ -217,7 +217,7 @@ def process_order_verify(request):
     headers = {'Authorization': f'Bearer {os.environ.get("PAYSTACK_SECRET_KEY")}',}
     response = requests.get(url, headers=headers)
     res_data = response.json()
-    
+
     if res_data['status'] and res_data['data']['status'] == 'success':
             
             order = Order.objects.create(user=request.user,payment_reference=reference,ordered=True)
@@ -229,7 +229,7 @@ def process_order_verify(request):
             request.session.modified = True
 
             return render(request,'payment/payment_success.html', {'details':res_data['data']})
-    else :
+    else:
         return render(request,'payment/payment_failed.html')
 
 
@@ -263,7 +263,7 @@ def billing_info(request):
 
 
         return render(request, 'payment/billing_info.html', {'cart_products':cart_products,'quantities':quantities,'totals':totals,'shipping_form':shipping_form})
-    else :
+    else:
         messages.success(request,'Access Denied')
         return redirect('ecommerce')
 
