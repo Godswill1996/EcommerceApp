@@ -275,7 +275,7 @@ def checkout(request):
     if request.user.is_authenticated:
         #Check out as User
         #Shipping user
-        shipping_user = ShippingAddress.objects.get(user=request.user)
+        shipping_user = ShippingAddress.objects.filter(user=request.user).first()
         #Shipping form
         shipping_form = ShippingForm(request.POST or None, instance = shipping_user)
         return render(request, 'payment/checkout.html', {'cart_products':cart_products,'quantities':quantities,'totals':totals, 'shipping_form':shipping_form })
