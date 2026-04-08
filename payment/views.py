@@ -233,7 +233,7 @@ def process_order_verify(request):
             new_order = Order.objects.create(user=request.user if request.user.is_authenticated else None,full_name=full_name ,email=email,amount_paid=totals,shipping_address=address)
             for item in cart_products:
                 product_id = str(item.id)
-                OrderItems.objects.create(order=new_order,products=item,user=request.user if request.user.is_authenticated else None,quantity=quantities[product_id],price=item.price if not item.is_sale else item.sale_price)
+                OrderItems.objects.create(order=new_order,products=item,user=request.user if request.user.is_authenticated else None,quantity=quantities.get(product_id,1),price=item.price if not item.is_sale else item.sale_price)
             
             request.session.pop('cart',None)
             request.session.modified = True
