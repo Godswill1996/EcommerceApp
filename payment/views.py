@@ -218,15 +218,11 @@ def process_order_verify(request):
     response = requests.get(url, headers=headers)
     res_data = response.json()
     if res_data['status'] and res_data['data']['status'] == 'success':
-        #clear cart
-        if request.user.is_authenticated:
-            Cart.objects.filter(user=request.user).delete()
-        #clear session key
-        if 'cart' in request.session:
-            del request.session['cart']
+
+            request.session.pop('cart',None)
             request.session.modified = True
 
-        return render(request,'payment/payment_success.html', {'details':res_data['data']})
+            return render(request,'payment/payment_success.html', {'details':res_data['data']})
     else :
         return render(request,'payment/payment_failed.html')
 
