@@ -225,7 +225,7 @@ def process_order_verify(request):
             totals = cart.cart_total()
             full_name=f"{res_data['data']['customer']['first_name']} {res_data['data']['customer']['last_name']}"
             email=res_data['data']['customer']['email']
-            shipping_address= request.session.get('shipping_info','N/A')
+            shipping_address= request.session.get('my_shipping',{})
 
 
             new_order = Order.objects.create(user=request.user if request.user.is_authenticated else None,full_name=full_name ,email=email,amount_paid=totals,shipping_address=shipping_address)
