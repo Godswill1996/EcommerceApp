@@ -223,8 +223,12 @@ def process_order_verify(request):
             cart_products = cart.get_prods()
             quantities = cart.get_quants
             totals = cart.cart_total()
+            full_name=f"{res_data['data']['customer']['first_name']} {res_data['data']['customer']['last_name']}"
+            email=res_data['data']['customer']['email']
+            shipping_address= request.session.get('shipping_info','N/A')
 
-            new_order = Order.objects.create(user=request.user if request.user.is_authenticated else None,full_name=f"{res_data['data']['customer']['first_name']}",email=res_data['data']['customer']['email'],amount_paid=totals,shipping_address=request.session.get('shipping_info','N/A'))
+
+            new_order = Order.objects.create(user=request.user if request.user.is_authenticated else None,full_name=full_name ,email=email,amount_paid=totals,shipping_address=shipping_address)
             for item in cart_products:
                 product_id = str(item.id)
                 OrderItems.objects.create(order=new_order,products=item,user=request.user if request.user.is_authenticated else None,quantity=quantities[product_id],price=item.price if not item.is_sale else item.sale_price)
