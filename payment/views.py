@@ -221,15 +221,13 @@ def process_order_verify(request):
     if res_data['status'] and res_data['data']['status'] == 'success':
             cart = Cart(request)
             cart_products = cart.get_prods()
-            quantities = cart.get_quants
+            quantities = cart.get_quants()
             totals = cart.cart_total()
             shipping_data= request.session.get('my_shipping',{})
             full_name = shipping_data.get('shipping_full_name','Guest')
             email = shipping_data.get('shipping_email',res_data['data']['customer']['email'])
             address = f"{shipping_data.get('shipping_address1')}, {shipping_data.get('shipping_city')}"
             
-
-
             new_order = Order.objects.create(user=request.user if request.user.is_authenticated else None,full_name=full_name ,email=email,amount_paid=totals,shipping_address=address)
             for item in cart_products:
                 product_id = str(item.id)
@@ -237,7 +235,6 @@ def process_order_verify(request):
             
             request.session.pop('cart',None)
             request.session.modified = True
-
             return render(request,'payment/payment_success.html',{'order':new_order})
     else:
         return render(request,'payment/payment_failed.html')
