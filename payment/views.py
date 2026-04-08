@@ -220,10 +220,10 @@ def process_order_verify(request):
 
     if res_data['status'] and res_data['data']['status'] == 'success':
             
-            order = Order.objects.create(user=request.user,payment_reference=reference,ordered=True)
+           # order = Order.objects.create(user=request.user,payment_reference=reference,ordered=True)
 
-            for item in Cart(request):
-                OrderItems.objects.create(order=order,product=item['product'],quantity=item['qty'],price=item['price'])
+           # for item in Cart(request):
+            #    OrderItems.objects.create(order=order,product=item['product'],quantity=item['qty'],price=item['price'])
 
             request.session.pop('cart',None)
             request.session.modified = True
