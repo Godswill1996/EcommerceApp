@@ -238,7 +238,7 @@ def process_order_verify(request):
             request.session.pop('cart',None)
             request.session.modified = True
 
-            return render(request,'payment/payment_success.html', {'details':res_data['data']})
+            return render(request,'payment/payment_success.html', {'details':res_data.get('data',{})})
     else:
         return render(request,'payment/payment_failed.html')
 
