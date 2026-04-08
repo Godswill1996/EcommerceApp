@@ -26,7 +26,7 @@
                 {% for items in cart_products %}
                   {{ items.name }}:
                         {% if items.is_sale %}
-                             ${{ items.sale_price }}
+                             ₦{{ items.sale_price }}
                         {% else %}
                             ₦{{ items.price }}
 
